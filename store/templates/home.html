@@ -72,6 +72,57 @@
 
         <hr class="mt-3">
     
-</div>
+    
+
+        <!-- Lojas -->
+        <div class="row">
+
+            {% for store in stores %}
+
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-stretch pb-3">
+                    <div class="card text-center bg-light" style="box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3)">
+
+                        <img src="{% static 'img/store.jpg' %}" alt="{{ store.name }}" class="img-fluid" />
+
+                        <div class="card-header">
+                            {{ store.name }}
+                        </div>
+
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                ENDEREÇO
+                            </h5>
+                            <p class="card-text">
+                                {{ store.district }}, {{ store.number }} - {{ store.address }}
+                            </p>
+                            <p class="card-text">{{ store.city }} - {{ store.state }}</p>
+                        </div>
+
+                        <div class="card-footer">
+                            <a href="{% url 'store' store.id %}" class="btn btn-danger">Acessar</a>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        <hr class="mt-3">
+
+        <!-- Ordenação Início -->
+        <div class="row pb-4">
+            <div class="col-12">
+                <div class="d-flex flex-row-reverse justify-content-center justify-content-md-start">    
+                    <nav class="d-inline-block">
+                        <ul class="pagination pagination-sm my-0">
+                            <li class="page-item"><button class="page-link">1</button></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 {% endblock %}

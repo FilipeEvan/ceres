@@ -92,8 +92,9 @@ def logout(request):
 
 # Store
 def home(request):
-    status = request.GET.get('status')
-    return render(request, 'home.html', {'status': status})
+    stores = Store.objects.all().order_by('name')
+
+    return render(request, 'home.html', {'stores': stores})
 
 @login_required
 def create_store(request):
@@ -131,3 +132,8 @@ def create_store(request):
 @login_required
 def my_store(request):
     return HttpResponse('Minha loja')
+
+def store(request, id):
+    store = Store.objects.get(id = id)
+
+    return render(request, 'store.html', {'store': store})

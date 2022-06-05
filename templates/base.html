@@ -81,18 +81,17 @@
         </header>
 
         <!-- Messages -->
-        <div class="container">
-
+        {% if messages %}
             <br>
-
-            {% if messages %}
+            <div class="container">
                 <ul class="messages">
                     {% for message in messages %}
                         <li {% if message.tags %}class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</if>
                     {% endfor %}
                 </ul>
-            {% endif%}
-        </div>
+            </div>   
+        {% endif%}
+        
 
         <main>
 
@@ -104,6 +103,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
         <script src="{% static 'js/state-city.js' %}"></script>
+        <script src="{% static 'js/store.js' %}"></script>
 
     </body>
 </html>

@@ -13,4 +13,5 @@ urlpatterns = [
     path('', views.home, name = 'home'),
     path('create_store/', views.create_store, name = 'create_store'),
     path('my_store/', views.my_store, name = 'my_store'),
+    path('store/<int:id>', views.store, name = 'store'),
 ]
