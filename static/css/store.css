@@ -83,7 +83,7 @@
 }
 
 #sessoes {
-    margin-top: 120px;
+    margin-top: 60px;
 }
 
 .quadrado-branco {
@@ -182,8 +182,7 @@
     height: 500px;
 }
 #chat {
-    height: 800px;
-    max-width: 700px;
+    height: 175px;
 }
 
 .conteudo {
@@ -273,18 +272,6 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-}
-#img1 {
-    background-image: url(../paginas/imagens/maca.jpg);
-}
-#img2 {
-    background-image: url(../paginas/imagens/melancia.jpg);
-}
-#img3 {
-    background-image: url(../paginas/imagens/pera.jpg);
-}
-#img4 {
-    background-image: url(../paginas/imagens/uva.webp);
 }
 
 .botao {

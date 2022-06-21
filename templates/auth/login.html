@@ -10,6 +10,18 @@
 
 {% block 'content' %}
 
+    <!-- Messages -->
+    {% if messages %}
+        <br>
+        <div class="container">
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %}class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</if>
+                {% endfor %}
+            </ul>
+        </div>   
+    {% endif%}
+
     <form method="POST" action="{% url 'validate_login' %}" class="formulario" id="formularioLogin">
         {% csrf_token %}       
 

@@ -10,6 +10,267 @@
 
 {% block 'content' %}
 
+
+    <!-- Modal Editar Loja -->
+    <div class="modal fade" id="modalEditarProduto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <i class="bi bi-pencil-square" id="icone-adicionar-produto"></i>
+                    <h5 class="modal-title" id="staticBackdropLabel" style="margin-left: 5px;">Editar informações</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form method="POST" action="{% url 'update_store' store.id %}">
+                    {% csrf_token %}
+                    
+                    <div class="modal-body">
+
+                        <div style="margin-bottom: 15px;" id="campo-loja">
+                            <label for="input-nome" class="label-campo" id="label-nome">
+                                Nome da loja 
+                                <strong>
+                                    <span class="asteristico">*</span>
+                                </strong>
+                            </label>
+                            <input type="text" class="input-campo" id="input-nome" placeholder="Digite o novo nome da loja . . ." name="name" value="{{store.name}}" required>
+                        </div>
+        
+                        <div style="margin-bottom: 15px;" id="campo-bairro">
+                            <label for="input-bairro" class="label-campo" id="label-bairro">
+                                Bairro 
+                                <strong>
+                                    <span class="asteristico">*</span>
+                                </strong>
+                            </label>
+                            <input type="text" class="input-campo" id="input-bairro" placeholder="Digite o novo bairro . . ." name="district"  value="{{store.district}}" required>
+                        </div>
+        
+        
+                        <div style="margin-bottom: 15px;" id="campo-endereco">
+                            <label for="input-endereco" class="label-campo" id="label-endereco">
+                                Endereço 
+                                <strong>
+                                    <span class="asteristico">*</span>
+                                </strong>
+                            </label>
+                            <br>
+                            <input type="text" class="input-campo" id="input-endereco" placeholder="Digite a nova rua . . ." name="address" value="{{store.address}}" required>
+                        </div>
+                        <div style="margin-bottom: 15px;" id="campo-numero">
+                            <label for="input-numero" class="label-campo" id="label-numero">
+                                Número
+                            </label>
+                            <br>
+                            <input type="number" class="input-campo" id="input-numero" name="number" value="{{store.number}}">
+                        </div>
+
+                        <div style="margin-bottom: 15px;" id="campo-estado">
+                            <label for="input-estado" class="label-campo" id="label-estado">
+                                Estado 
+                                <strong>
+                                    <span class="asteristico">*</span>
+                                </strong>
+                            </label>
+                            <br>
+                            <select name="state" class="input-campo" id="input-estado"  required>
+                                <option value="{{store.state}}" selected>{{store.state}}</option>
+                            </select>
+                        </div>
+                        <div style="margin-bottom: 15px;" id="campo-cidade">
+                            <label for="input-cidade" class="label-campo" id="label-cidade">
+                                Cidade 
+                                <strong>
+                                    <span class="asteristico">*</span>
+                                </strong>
+                            </label>
+                            <br>
+                            <select name="city" class="input-campo" id="input-cidade"  required>
+                                <option value="{{store.city}}" selected>{{store.city}}</option>
+                            </select>
+                        </div>
+
+                        <div id="campo-telefone">
+                            <label for="input-telefone" class="label-campo" id="label-telefone">
+                                Telefone para contato 
+                                <strong>
+                                    <span class="asteristico">*</span>
+                                </strong>
+                            </label>
+                            <br>
+                            <input type="number" name="phone" class="input-campo" id="input-telefone" placeholder="Digite o novo telefone . . ." value="{{store.phone}}" required>
+                        </div>
+
+                        
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Atualizar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Modal Criar Produto -->
+    <div class="modal fade" id="modalAdicionarProduto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <i class="bi bi-plus-lg" id="icone-adicionar-produto"></i>
+                    <h5 class="modal-title" id="staticBackdropLabel" style="margin-left: 5px;">Adicionar produto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form method="POST" action="{% url 'create_product' store.id %}" enctype='multipart/form-data'>
+                    {% csrf_token %}
+
+                    <div class="modal-body">
+
+                        <div class="campo-cadastrar-produto">
+                            <label for="cadastroNomeProduto" class="label-campo">
+                                Nome 
+                                <strong>
+                                    <span class="asteristico">*</span>
+                                </strong>
+                            </label>
+                            <input type="text" class="input-campo" id="cadastroNomeProduto" name="name" placeholder="Digite o nome do produto . . ." required>
+                        </div>
+
+                        <div class="campo-cadastrar-produto">
+                            <label for="cadastroCategoriaProduto" class="label-campo">
+                                Categoria 
+                                <strong>
+                                    <span class="asteristico">*</span>
+                                </strong>
+                            </label>
+                            <select name="category" class="input-campo" id="cadastroCategoriaProduto" required>
+                                <option value="" selected disabled>- Selecione -</option>
+                                <option value="1">Frutas</option>
+                                <option value="2">Verduras</option>
+                                <option value="3">Legumes</option>
+                                <option value="4">Origem animal</option>
+                                <option value="5">Outro</option>
+                            </select>
+                        </div>
+
+                        <div class="campo-cadastrar-produto">
+                            <label for="input-quantidade" class="label-campo" id="label-quantidade">
+                                Quantidade 
+                                <strong>
+                                    <span class="asteristico">*</span>
+                                </strong>
+                            </label>
+                            <br>
+                            <input type="number" name="quantity_number" class="input-campo" id="cadastroQuantidadeProduto" required>
+                            <select class="input-campo" name="quantity_type" id="cadastroTipoQuantidadeProduto"  required>
+                                <option value="" selected disabled>Nenhum selecionado</option>
+                                <option value="Kg">Kg</option>
+                                <option value="Grama(s)">Grama(s)</option>
+                                <option value="Unidade(s)">Unidade(s)</option>
+                                <option value="Litro(s)">Litro(s)</option>
+                            </select>
+                        </div>
+
+                        <div class="campo-cadastrar-produto">
+                            <label for="input-valor-produto" class="label-campo" id="label-valor-produto">
+                                Preço total 
+                                <strong>
+                                    <span class="asteristico">*</span>
+                                </strong>
+                            </label>
+                            <br>
+                            R$ <input type="number" step="00.01" name="price" class="input-campo" id="cadastroPrecoProduto" placeholder="00.00" required>
+                        </div>
+
+                        <div class="campo-cadastrar-produto">
+                            <label for="cadastroDescricaoProduto" class="label-campo" id="label-descricao-produto">
+                                Descrição 
+                                <strong>
+                                    <span class="asteristico">*</span>
+                                </strong>
+                            </label>
+                            <br>
+                            <textarea class="input-campo" name="description" id="cadastroDescricaoProduto" cols="54" rows="3" placeholder="Informações como estado do produto, dia da coleta, uso de agrotóxicos, etc" maxlength="150" required></textarea>
+                        </div>
+
+                        <div class="campo-cadastrar-produto">
+                            <label for="input-quantidade" class="label-campo" id="label-quantidade">
+                                Foto 
+                                <strong>
+                                    <span class="asteristico">*</span>
+                                </strong>
+                            </label>
+                            <br>
+                            <input type="file" name="image" accept="image/png,image/jpeg" class="" id="cadastroFotoProduto" required>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Cadastrar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Ver Produto -->
+    <div class="modal fade" id="modalVerProduto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <i class="bi bi-info-circle"></i>
+                    <h5 class="modal-title" id="staticBackdropLabel" style="margin-left: 5px;">Informações sobre o produto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <img src="{{product.image.url}}" class="imagem-card" alt="...">
+                    <div style="border: 2px solid var(--cinza2); padding: 15px; border-radius: 10px; margin-top: 15px;">
+                        <h3>{{product.name}}</h3>
+                        <div style="background-color: var(--cinza3); padding: 20px;">
+                            <div style="margin-bottom: 20px;">
+                                <i class="fa-solid fa-caret-right"></i>
+                                <h5 class="titulo-conteudo-card" style="display: inline-block; margin-left: 3px;">Descrição</h5>
+                                <p class="paragrafo-conteudo-card">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Exercitationem,</p>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <i class="fa-solid fa-caret-right"></i>
+                                <h5 class="titulo-conteudo-card" style="display: inline-block; margin-left: 3px;">Categoria</h5>
+                                <p class="paragrafo-conteudo-card">Frutas</p>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <i class="fa-solid fa-caret-right"></i>
+                                <h5 class="titulo-conteudo-card" style="display: inline-block; margin-left: 3px;">Quantidade</h5>
+                                <p class="paragrafo-conteudo-card">1 kg</p>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-caret-right"></i>
+                                <h5 class="titulo-conteudo-card" style="display: inline-block; margin-left: 3px;">Preço</h5>
+                                <p class="paragrafo-conteudo-card">R$ 10 por kg</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
     <!-- Título da Loja -->
     <div id="container-titulo-loja"> 
         <div id="linha-vertical1"></div>
@@ -18,6 +279,18 @@
             {{store.name}}
         </h1>
     </div>
+
+    <!-- Messages -->
+    {% if messages %}
+        <br>
+        <div class="container">
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %}class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</if>
+                {% endfor %}
+            </ul>
+        </div>   
+    {% endif%}
 
     <!-- Sessões Loja -->
     <div id="sessoes">
@@ -30,9 +303,14 @@
                     <i class="bi bi-info-square-fill"></i>
                     <h2 class="titulo-sessao">INFORMAÇÕES</h2>
                 </div>
-                <div id="adicionar-produto" data-bs-toggle="modal" data-bs-target="#modalEditarProduto">
-                    <i class="bi bi-pencil-square" id="icone-adicionar-produto"></i> Editar
-                </div>
+
+                {% if user.is_authenticated %}
+                    {% if user.id == store.user.id %}
+                        <div id="adicionar-produto" data-bs-toggle="modal" data-bs-target="#modalEditarProduto">
+                            <i class="bi bi-pencil-square" id="icone-adicionar-produto"></i> Editar
+                        </div>
+                    {% endif %}
+                {% endif %}
                 
                 <div id="div-conteudo-informacoes">
                     <div class="item-paragrafro" title="Telefone para contato">
@@ -77,68 +355,50 @@
                     <i class="bi bi-basket3-fill"></i>
                     <h2 class="titulo-sessao">PRODUTOS</h2>
                 </div>
-                <div id="adicionar-produto" data-bs-toggle="modal" data-bs-target="#modalAdicionarProduto">
-                    <i class="bi bi-plus-lg" id="icone-adicionar-produto"></i> Adicionar
-                </div>
+
+                {% if user.is_authenticated %}
+                    {% if user.id == store.user.id %}
+                        <div id="adicionar-produto" data-bs-toggle="modal" data-bs-target="#modalAdicionarProduto">
+                            <i class="bi bi-plus-lg" id="icone-adicionar-produto"></i> Adicionar
+                        </div>
+                    {% endif %}
+                {% endif %}
 
                 <div class="container-itens-scroll">
                     <div class="scroll-horizontal">
+
                         <button class="botao" id="botaoEsquerdo" onclick="scrollHorizontal(1)"><i class="bi bi-chevron-left" id="arrow"></i></button>
+
                         <button class="botao" id="botaoDireito" onclick="scrollHorizontal(-1)"><i class="bi bi-chevron-right" id="arrow"></i></button>
+
                         <div id="cards-container">
-                            <div class="card" style="width: 11rem;">
-                                <div class="card-img-top" id="img1"><i class="bi bi-trash3-fill" id="icone-deletar-produto"></i></div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Maça</h5>
-                                    <p class="card-text" style="margin-bottom: 0;">10 unidades</p>
-                                    <p class="card-text">R$ 19,90</p>
-                                    <button type="button" class="btn btn-laranja" data-bs-toggle="modal" data-bs-target="#modalVerProduto">Ver produto</button>
+
+                            {% for product in products %}
+                                <div class="card" style="width: 11rem;">
+                                    <div class="card-img-top" style="background-image: url({{product.image.url}});">
+                                        {% if user.is_authenticated %}
+                                            {% if user.id == store.user.id %}
+                                                <i class="bi bi-trash3-fill" id="icone-deletar-produto"></i>
+                                            {% endif %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{product.name}}</h5>
+                                        <p class="card-text" style="margin-bottom: 0;">{{product.quantity}}</p>
+                                        <p class="card-text">R$ {{product.price}}</p>
+
+                                        
+                                        <button type="button" class="btn btn-laranja" data-bs-toggle="modal" data-bs-target="#modalVerProduto">
+                                            Ver produto
+                                        </button>
+                                        
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card" style="width: 11rem;">
-                                <div class="card-img-top" id="img2"><i class="bi bi-trash3-fill" id="icone-deletar-produto"></i></div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Melancia</h5>
-                                    <p class="card-text" style="margin-bottom: 0;">3 unidades</p>
-                                    <p class="card-text">R$ 35,90</p>
-                                    <button type="button" class="btn btn-laranja" data-bs-toggle="modal" data-bs-target="#modalVerProduto">Ver produto</button>                                    </div>
-                            </div>
-                            <div class="card" style="width: 11rem;">
-                                <div class="card-img-top" id="img3"><i class="bi bi-trash3-fill" id="icone-deletar-produto"></i></div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Melancia </h5>
-                                    <p class="card-text" style="margin-bottom: 0;">5 kg</p>
-                                    <p class="card-text">R$ 12,90</p>
-                                    <button type="button" class="btn btn-laranja" data-bs-toggle="modal" data-bs-target="#modalVerProduto">Ver produto</button>                                    </div>
-                            </div>
-                            <div class="card" style="width: 11rem;">
-                                <div class="card-img-top" id="img4"><i class="bi bi-trash3-fill" id="icone-deletar-produto"></i></div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Uva</h5>
-                                    <p class="card-text" style="margin-bottom: 0;">8 kg</p>
-                                    <p class="card-text">R$ 25,90</p>
-                                    <button type="button" class="btn btn-laranja" data-bs-toggle="modal" data-bs-target="#modalVerProduto">Ver produto</button>                                    </div>
-                            </div>
-                            <div class="card" style="width: 11rem;">
-                                <div class="card-img-top" id="img4"><i class="bi bi-trash3-fill" id="icone-deletar-produto"></i></div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Uva</h5>
-                                    <p class="card-text" style="margin-bottom: 0;">4 unidades</p>
-                                    <p class="card-text">R$ 10</p>
-                                    <button type="button" class="btn btn-laranja" data-bs-toggle="modal" data-bs-target="#modalVerProduto">Ver produto</button>                                    </div>
-                            </div>
-                            <div class="card" style="width: 11rem;">
-                                <div class="card-img-top" id="img4"><i class="bi bi-trash3-fill" id="icone-deletar-produto"></i></div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Uva</h5>
-                                    <p class="card-text" style="margin-bottom: 0;">20 unidades</p>
-                                    <p class="card-text">R$ 9,90</p>
-                                    <button type="button" class="btn btn-laranja" data-bs-toggle="modal" data-bs-target="#modalVerProduto">Ver produto</button>                                    </div>
-                            </div>
+                            {% endfor %}
                             
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
         </section>
@@ -150,6 +410,10 @@
                     <i class="bi bi-chat-left-text-fill"></i>
                     <h2 class="titulo-sessao">CHAT</h2>
                 </div>
+                <br>
+                <br>
+                
+                <h3>Página em desenvolvimento</h3>
             </div>
         </section>
 

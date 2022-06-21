@@ -10,6 +10,9 @@
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
+        <!-- Bootstrap Icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
         <link rel="stylesheet" href="{% static 'css/global-settings.css' %}">
         <link rel="stylesheet" href="{% block 'css' %} {% endblock %}">
 
@@ -39,15 +42,13 @@
 
                             {% if user.is_authenticated %}
                                    
-                                {% if not store.user %}
+                                {% if not my_store.user.id == user.id %}
                                     <li class="nav-item">
                                         <a class="nav-link" href="{% url 'create_store' %}">Criar loja</a>
                                     </li>
-                                {% endif %}
-
-                                {% if store.user %}
+                                {% else %}
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{% url 'my_store' %}">Minha loja</a>
+                                        <a class="nav-link" href="{% url 'store' my_store.id %}">Minha loja</a>
                                     </li>
                                 {% endif %}
                             {% endif %}
@@ -79,19 +80,6 @@
             </nav>
 
         </header>
-
-        <!-- Messages -->
-        {% if messages %}
-            <br>
-            <div class="container">
-                <ul class="messages">
-                    {% for message in messages %}
-                        <li {% if message.tags %}class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</if>
-                    {% endfor %}
-                </ul>
-            </div>   
-        {% endif%}
-        
 
         <main>
 

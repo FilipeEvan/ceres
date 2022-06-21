@@ -76,7 +76,7 @@ def validate_login(request):
             if user is not None:
                 auth.login(request, user)
                 messages.success(request, 'Login realizado com sucesso!')
-                return redirect('/?status=1')
+                return redirect('/')
 
     if not request.user.is_authenticated:
         messages.warning(request, 'E-mail ou senha inválidos!')
@@ -92,9 +92,20 @@ def logout(request):
 
 # Store
 def home(request):
-    stores = Store.objects.all().order_by('name')
+    try:
+        stores = Store.objects.all().order_by('name')
+    except Store.DoesNotExist:
+        stores = None
 
-    return render(request, 'home.html', {'stores': stores})
+    if request.user.is_authenticated:     
+        try:
+            my_store = stores.get(user=request.user)
+        except:
+            my_store = None
+
+        return render(request, 'home.html', {'stores': stores, 'my_store': my_store})
+    else:
+        return render(request, 'home.html', {'stores': stores})
 
 @login_required
 def create_store(request):
@@ -127,13 +138,87 @@ def create_store(request):
         return redirect('/')
 
     else:
-        return render(request, 'create_store.html')
-
-@login_required
-def my_store(request):
-    return HttpResponse('Minha loja')
+        return render(request, 'create_store.html') 
 
 def store(request, id):
     store = Store.objects.get(id = id)
+    
+    try:
+        products = Product.objects.filter(store = store).order_by('-name')
+    except Store.DoesNotExist:
+        products = None
 
-    return render(request, 'store.html', {'store': store})
+    try:
+        my_store = Store.objects.get(user=request.user)
+    except:
+        my_store = None
+
+    return render(request, 'store.html', {'store': store, 'my_store': my_store, 'products': products})
+
+@login_required
+def update_store(request, id):
+    store = Store.objects.get(id = id)
+
+    if request.method == 'POST':
+        store.user = request.user
+
+        store.name = request.POST.get('name')
+        store.district = request.POST.get('district')
+        store.address = request.POST.get('address')
+        store.number = request.POST.get('number')
+        store.state = request.POST.get('state')
+        store.city = request.POST.get('city')
+        store.phone = request.POST.get('phone')
+
+        store.save()
+
+        messages.success(request, 'Loja atualizada com sucesso.')
+    
+        return redirect(f'/store/{store.id}')
+
+    else:
+        return render(request, 'home.html') 
+
+@login_required
+def create_product(request, id):
+    store = Store.objects.get(id = id)
+
+    if request.method == 'POST':
+
+        image = request.FILES.get('image')
+        name = request.POST.get('name')
+        category = request.POST.get('category')
+        price = request.POST.get('price')
+        description = request.POST.get('description')
+
+        quantity_number = request.POST.get('quantity_number')
+        quantity_type = request.POST.get('quantity_type')
+
+        print(quantity_number)
+        print(type(quantity_number))
+        print(quantity_type)
+        print(type(quantity_type))
+
+        quantity = str(quantity_number) + " " + quantity_type
+
+        print(quantity)
+
+        product = Product(
+            image = image,
+            name = name,
+            category = category,
+            quantity = quantity,
+            price = price,
+            description = description,
+            store = store
+        )
+
+        product.save()
+
+        messages.success(request, 'Produto criado com sucesso.')
+    
+        return redirect(f'/store/{store.id}')
+
+    else:
+        return render(request, 'home.html') 
+

@@ -12,6 +12,9 @@ urlpatterns = [
     # Store
     path('', views.home, name = 'home'),
     path('create_store/', views.create_store, name = 'create_store'),
-    path('my_store/', views.my_store, name = 'my_store'),
     path('store/<int:id>', views.store, name = 'store'),
+    path('update_store/<int:id>', views.update_store, name = 'update_store'),
+
+    # Product
+    path('create_product/<int:id>', views.create_product, name = 'create_product'),
 ]
