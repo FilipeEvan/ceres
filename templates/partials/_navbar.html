@@ -1,0 +1,74 @@
+{% load static %}
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-vinho">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="Home.html">
+                <img src="{% static 'img/logo.png' %}" alt="" width="60" height="48" class="d-inline-block align-text-top">CERES
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{% url 'dashboard' %}" title="Ir à Home">
+                            <i class="bi bi-house-door-fill icone-navbar"></i>HOME
+                        </a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        {% if user.is_staff %}
+                            {% if stores %}
+                                {% for store in stores %}
+                                    {% if store.user == user %}
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'store' store.id %}" title="Ir à Minha loja">
+                                                <i class="bi bi-cart-fill icone-navbar"></i>MINHA LOJA
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'create_store' %}" title="Ir à Criar loja">
+                                    <i class="bi bi-bag-plus-fill icone-navbar"></i>CRIAR LOJA
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                </ul>
+                
+                {% if user.is_authenticated %}
+                    <!-- COM CONTA LOGADA -->
+                    <div class="d-flex">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="" id="" href="{% url 'profile' %}" title="Meu perfil">
+                                    <i class="bi bi-person-circle" id="minha-conta"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <!-- SEM CONTA LOGADA -->
+                    <div class="d-flex">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="botaoNavBar" href="{% url 'register' %}">CADASTRAR</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" id="botaoNavBar" href="{% url 'login' %}">LOGAR</a>
+                            </li>
+                        </ul>
+                    </div> 
+                {% endif %}
+                </div>
+
+        </div>
+    </nav>
+</header>

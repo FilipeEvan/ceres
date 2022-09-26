@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Adicionar Produto | {% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/criar-loja.css' %}">
+    <link rel="stylesheet" href="{% static 'css/loja.css' %}">
+{% endblock %}
+
+{% block content %}      
+    <main>        
+
+        <form class="formulario" id="formularioCriarLoja" name="formulario" action="{% url 'create_product' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div id="conteudo">
+                <h1 class="titulo">Adicionar produto</h1>
+
+                <div style="margin-bottom: 15px;" id="campo-loja">
+                    <label for="input-nome" class="label-campo" id="label-nome">Nome do produto <strong><span class="asteristico">*</span></strong></label>
+                    <input type="text" class="input-campo" id="cadastroNomeProduto" name="name"
+                        placeholder="Digite o nome do produto . . ." required>
+                </div>
+
+                <div class="campo-cadastrar-produto">
+                    <label for="cadastroCategoriaProduto" class="label-campo">Categoria <strong><span
+                                class="asteristico">*</span></strong></label>
+                    <select class="input-campo" id="cadastroCategoriaProduto" name="category" required>
+                        <option value="" selected disabled>- Selecione -</option>
+                        <option value="Frutas">Frutas</option>
+                        <option value="Verduras">Verduras</option>
+                        <option value="Legumes">Legumes</option>
+                        <option value="Origem animal">Origem animal</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                </div>
+
+                <div class="campo-cadastrar-produto">
+                    <label for="input-quantidade" class="label-campo" id="label-quantidade">Quantidade
+                        <strong><span class="asteristico">*</span></strong></label><br>
+                    <input type="number" class="input-campo" id="cadastroQuantidadeProduto" name="quantity" required>
+                    <select class="input-campo" id="cadastroTipoQuantidadeProduto" name="unity" required>
+                        <option value="" selected disabled>Nenhum selecionado</option>
+                        <option value="Kg">Kg</option>
+                        <option value="Grama(s)">Grama(s)</option>
+                        <option value="Unidade(s)">Unidade(s)</option>
+                        <option value="Litro(s)">Litro(s)</option>
+                    </select>
+                </div>
+
+                <div class="campo-cadastrar-produto">
+                    <label for="input-valor-produto" class="label-campo" id="label-valor-produto">Preço total
+                        <strong><span class="asteristico">*</span></strong></label><br>
+                    R$ <input type="text" class="input-campo" id="cadastroPrecoProduto" name="price" placeholder="0,00" required onkeyup="maskMoney()">
+                </div>
+
+                <div class="campo-cadastrar-produto">
+                    <label for="cadastroDescricaoProduto" class="label-campo" id="label-descricao-produto">Descrição
+                        <strong><span class="asteristico">*</span></strong></label><br>
+                    <textarea class="input-campo" name="description" id="cadastroDescricaoProduto" name="description"
+                        cols="56" rows="4" placeholder="Informações como estado do produto, dia da coleta, uso de agrotóxicos, etc"
+                        maxlength="150" required></textarea>
+                </div>
+
+                <div class="campo-cadastrar-produto">
+                    <label for="input-quantidade" class="form-label label-campo" id="label-quantidade">Foto <strong><span
+                                class="asteristico">*</span></strong></label><br>
+                    <input type="file" accept="image/png,image/jpeg" class="form-control" name="image" id="cadastroFotoProduto" required>
+                </div>
+
+            </div>
+
+            <button type="submit" class="botao-principal" id="btn-adc-produto" style="margin-bottom: 25px;" name="button" value="add">
+                Adicionar produto
+            </button>
+            <button type="submit" id="btn-adc-produto2" style="margin-bottom: 25px;" name="button" value="continue">
+                Adicionar e continuar adicionando
+            </button>
+
+            <hr class="linhaFormulario">
+
+            <div class="rodape-formulario">
+                <p><strong><a href="{% url 'store' store.id %}" class="clique-aqui">Voltar à pagina principal</a></strong></p>
+            </div>
+        </form>
+        
+    </main>
+{% endblock %}
+           
+{% block scripts %}
+    <script src="{% static 'js/mask-money.js' %}"></script>
+{% endblock %}

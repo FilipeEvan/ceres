@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Criar loja | {% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/criar-loja.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main>
+        <form action="" class="formulario" id="formularioCriarLoja" name="formulario" action="{% url 'create_store' %}" method="POST">
+            {% csrf_token %}
+
+            <div id="conteudo">
+                <h1 class="titulo">Crie sua loja</h1>
+
+                {% include 'partials/_alert.html' %}
+
+                <div style="margin-bottom: 15px;" id="campo-loja">
+                    <label for="input-nome" class="label-campo" id="label-nome">Nome da loja <strong><span class="asteristico">*</span></strong></label>
+                    <input type="text" class="input-campo" id="name" name="name" placeholder="Digite o nome de sua loja . . ." maxlength="100" required>
+                </div>
+
+
+                <div style="margin-bottom: 15px;" id="campo-bairro">
+                    <label for="input-bairro" class="label-campo" id="label-bairro">Bairro <strong><span class="asteristico">*</span></strong></label>
+                    <input type="text" class="input-campo" id="district" name="district" placeholder="Digite seu bairro . . ." maxlength="150" required>
+                </div>
+
+
+                <div style="margin-bottom: 15px;" id="campo-endereco">
+                    <label for="input-endereco" class="label-campo" id="label-endereco">Endereço <strong><span class="asteristico">*</span></strong></label><br>
+                    <input type="text" class="input-campo" id="address" name="address" placeholder="Digite sua rua . . ." maxlength="50" required>
+                </div>
+                <div style="margin-bottom: 15px;" id="campo-numero">
+                    <label for="input-numero" class="label-campo" id="label-numero">Número</label><br>
+                    <input type="text" class="input-campo" id="number" name="number" maxlength="20" required>
+                </div>
+
+
+                <div style="margin-bottom: 15px;" id="campo-estado">
+                    <label for="state" class="label-campo" id="label-estado">Estado <strong><span class="asteristico">*</span></strong></label><br>
+                    <select name="state" class="input-campo" id="state" required>
+                        <option value="" disabled selected>- Selecione -</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 15px;" id="campo-cidade">
+                    <label for="city" class="label-campo" id="label-cidade">Cidade <strong><span class="asteristico">*</span></strong></label><br>
+                    <select name="city" class="input-campo" id="city" required>
+                        <option value="" disabled selected>- Selecione -</option>
+                    </select>
+                </div>
+
+
+                <div id="campo-telefone">
+                    <label for="input-telefone" class="label-campo" id="label-telefone">Telefone para contato <strong><span class="asteristico">*</span></strong></label><br>
+                    <input type="text" class="input-campo" id="phone" name="phone" placeholder="Digite seu telefone . . ." maxlength="15" required onkeyup="maskPhone()">
+                </div>
+
+                <button type="submit" class="botao-principal" style="margin-bottom: 25px;">Criar loja</button>
+
+            </div>
+
+            <hr class="linhaFormulario">
+
+            <div class="rodape-formulario">
+                <p><strong><a href="{% url 'dashboard' %}" class="clique-aqui">Voltar à pagina principal</a></strong></p>
+            </div>
+
+        </form>
+    </main>
+{% endblock %}
+
+{% block scripts %} 
+    <script src="{% static 'js/criar-loja.js' %}"></script>
+    <script src="{% static 'js/mask-phone.js' %}"></script>
+{% endblock %}

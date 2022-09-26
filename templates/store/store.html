@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Loja | {% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/loja.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main>
+        <!-- titulo loja -->
+        <div id="container-titulo-loja">
+            <div id="linha-vertical1"></div>
+            <div id="linha-vertical2"></div>
+            <h1 id="titulo-loja">{{ store.name }}</h1>
+        </div>
+
+        <div id="sessoes">
+
+            <!-- sessoes loja -->
+            <section class="quadrado-branco" id="informacoes">
+
+                <div class="conteudo">
+
+                    <!-- SECTION INFORMAÇÕES -->
+                    <div id="div-titulo-sessao">
+                        <i class="bi bi-info-square-fill"></i>
+                        <h2 class="titulo-sessao">INFORMAÇÕES</h2>
+                    </div>
+                    {% if store.user == user %}
+                        <a href="{% url 'edit_store' store.id %}">
+                            <div id="adicionar-produto" data-bs-toggle="modal" data-bs-target="#modalEditarProduto">
+                                <i class="bi bi-pencil-square" id="icone-adicionar-produto"></i> Editar
+                            </div>
+                        </a>
+                    {% endif %}
+
+                    <div id="div-conteudo-informacoes">
+                        <div class="item-paragrafro" title="Telefone para contato">
+                            <i class="bi bi-telephone-fill"></i>
+                            <p class="p-informacao"><strong>Tel:</strong> {{ store.phone }}</p>
+                        </div><br>
+                        <div class="item-paragrafro" title="localização da loja">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <p class="p-informacao"><strong>Bairro:</strong> {{ store.district }}</p><br>
+                            <p class="p-informacao" style="margin-left: 25.5px;"><strong>Endereço:</strong> {{ store.address }}</p><br>
+                            <p class="p-informacao" style="margin-left: 25.5px;"><strong>Número:</strong> {{ store.number }}</p><br>
+                        </div><br>
+                        <div class="item-paragrafro" title="Cidade/Estado">
+                            <i class="bi bi-house-fill"></i>
+                            <p class="p-informacao"><strong>Local:</strong> {{ store.city }}/{{ store.state }}</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="quadrado-branco" id="produtos">
+                <div class="conteudo">
+
+                    <div id="div-titulo-sessao">
+                        <i class="bi bi-basket3-fill"></i>
+                        <h2 class="titulo-sessao">PRODUTOS</h2>
+                    </div>
+                    {% if store.user == user %}
+                        <a href="{% url 'create_product' %}" target="_blank">
+                            <div id="adicionar-produto">
+                                <i class="bi bi-plus-lg" id="icone-adicionar-produto"></i> Adicionar
+                            </div>
+                        </a>
+                    {% endif %}
+                    
+                    <div class="container-itens-scroll">
+                        <div class="scroll-horizontal">
+                            <button class="botao" id="botaoEsquerdo" onclick="scrollHorizontal(1)"><i
+                                    class="bi bi-chevron-left" id="arrow"></i></button>
+                            <button class="botao" id="botaoDireito" onclick="scrollHorizontal(-1)"><i
+                                    class="bi bi-chevron-right" id="arrow"></i></button>
+                            <div id="cards-container">
+                                {% for product in products %}
+                                    <div class="card" style="width: 11rem;">
+                                        <input type="text" id="modalID" value="{{ product.id }}" hidden>
+                                        {% if product.image %}
+                                            <div class="card-img-top" style="background-image: url('{{ product.image.url }}')"></div>
+                                        {% else %}
+                                            <div class="card-img-top"></div>
+                                        {% endif %}
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ product.name }}</h5>
+                                            <p class="card-text" style="margin-bottom: 0;">{{ product.quantity }}</p>
+                                            <p class="card-text">R$ <strong>{{ product.price }}</strong></p>
+                                            <button type="button" class="btn btn-laranja" data-bs-toggle="modal" data-bs-target="#modalVerProduto" onclick="viewProduct({{ product.id }})">
+                                                VER PRODUTO
+                                            </button>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {% if user.is_authenticated %}
+                <!-- SECTION CHAT -->
+                <section class="quadrado-branco" id="chat">
+                    <div class="conteudo">
+                        <div id="div-titulo-sessao">
+                            <i class="bi bi-chat-left-text-fill"></i>
+                            <h2 class="titulo-sessao">CHAT</h2>
+                        </div>
+                        <div>
+                            {% with store.user.username|add:"-"|add:user.username as slug %}
+                                <a href="{% url 'room' slug %}?store={{ store }}" target="_blank" id="btn-chat">IR PARA CHAT <i class="bi bi-caret-right-fill" style="color: white;"></i></a>
+                            {% endwith %}
+                        </div>
+                    </div>
+                </section>
+            {% endif %}
+        </div>
+
+    </main>
+
+    <!-- Modal Ver Produto -->
+    {% include 'partials/modals/_modal_view_product.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/loja.js' %}"></script>
+{% endblock %}
