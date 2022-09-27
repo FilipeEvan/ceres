@@ -14,7 +14,7 @@ def dashboard(request):
     else:
         stores_list = Store.objects.all().order_by(order)
 
-        paginator = Paginator(stores_list, 1)
+        paginator = Paginator(stores_list, 12)
 
         page = request.GET.get('page')
 

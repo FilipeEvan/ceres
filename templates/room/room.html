@@ -17,7 +17,7 @@
                     <div id="chat-messages" class="messages-list">
                         <span class="message-bot">Bem vindo {{ room.client.get_full_name }}</span>
                         {% for message in messages %}
-                            <div class="message-container">
+                            <div class="message-container {% if message.user == user %}message-mine{% endif %}">
                                 <p class="author">{{ message.user.username }}</p>
                                 <p class="message">{{ message.content }}</p>
                             </div>
@@ -25,11 +25,11 @@
                     </div>
                 </div>
             </div>
-            <form method="POST">
+            <form method="POST" id="chat-message-submit">
                 {% csrf_token %}
                 <div class="chat-footer">
-                    <input id="chat-message-input" class="message-input" placeholder="Digite algo ..." type="text" id="input">
-                    <i id="chat-message-submit" class="bi bi-arrow-right-circle btn-send" style="font-size: 30px; color: #7a1f1f;"></i>
+                    <input id="chat-message-input" class="message-input" placeholder="Digite algo ..." type="text" id="input" required>
+                    <button style="border: none; background-color: transparent;"><i class="bi bi-arrow-right-circle btn-send" style="font-size: 30px; color: #7a1f1f;"></i></button>
                 </div>
             </form>
         </div>
@@ -69,7 +69,8 @@
             
                 scrollToBottom();
             } else {
-                alert('The message was empty!');
+                // alert('The message was empty!');
+
             }
         }
 
@@ -79,7 +80,7 @@
 
         //
 
-        document.querySelector('#chat-message-submit').onclick = function(e) {
+        document.querySelector('#chat-message-submit').onsubmit = function(e) {
             e.preventDefault();
 
             const messageInputDom = document.querySelector('#chat-message-input');

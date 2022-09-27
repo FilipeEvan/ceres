@@ -57,12 +57,9 @@
             </section>
 
             <section class="quadrado-branco" id="produtos">
-                <div class="conteudo">
+                <div class="h-100 conteudo">
 
-                    <div id="div-titulo-sessao">
-                        <i class="bi bi-basket3-fill"></i>
-                        <h2 class="titulo-sessao">PRODUTOS</h2>
-                    </div>
+                   
                     {% if store.user == user %}
                         <a href="{% url 'create_product' %}" target="_blank">
                             <div id="adicionar-produto">
@@ -70,35 +67,44 @@
                             </div>
                         </a>
                     {% endif %}
-                    
-                    <div class="container-itens-scroll">
-                        <div class="scroll-horizontal">
-                            <button class="botao" id="botaoEsquerdo" onclick="scrollHorizontal(1)"><i
-                                    class="bi bi-chevron-left" id="arrow"></i></button>
-                            <button class="botao" id="botaoDireito" onclick="scrollHorizontal(-1)"><i
-                                    class="bi bi-chevron-right" id="arrow"></i></button>
-                            <div id="cards-container">
-                                {% for product in products %}
-                                    <div class="card" style="width: 11rem;">
-                                        <input type="text" id="modalID" value="{{ product.id }}" hidden>
-                                        {% if product.image %}
-                                            <div class="card-img-top" style="background-image: url('{{ product.image.url }}')"></div>
-                                        {% else %}
-                                            <div class="card-img-top"></div>
-                                        {% endif %}
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ product.name }}</h5>
-                                            <p class="card-text" style="margin-bottom: 0;">{{ product.quantity }}</p>
-                                            <p class="card-text">R$ <strong>{{ product.price }}</strong></p>
-                                            <button type="button" class="btn btn-laranja" data-bs-toggle="modal" data-bs-target="#modalVerProduto" onclick="viewProduct({{ product.id }})">
-                                                VER PRODUTO
-                                            </button>
+                    <div id="div-titulo-sessao">
+                        <i class="bi bi-basket3-fill"></i>
+                        <h2 class="titulo-sessao">PRODUTOS</h2>
+                    </div>
+                    {% if products %}
+                        <div class="container-itens-scroll">
+                            <div class="scroll-horizontal">
+                                <button class="botao" id="botaoEsquerdo" onclick="scrollHorizontal(1)"><i
+                                        class="bi bi-chevron-left" id="arrow"></i></button>
+                                <button class="botao" id="botaoDireito" onclick="scrollHorizontal(-1)"><i
+                                        class="bi bi-chevron-right" id="arrow"></i></button>
+                                <div id="cards-container">
+                                    {% for product in products %}
+                                        <div class="card" style="width: 11rem;">
+                                            <input type="text" id="modalID" value="{{ product.id }}" hidden>
+                                            {% if product.image %}
+                                                <div class="card-img-top" style="background-image: url('{{ product.image.url }}')"></div>
+                                            {% else %}
+                                                <div class="card-img-top"></div>
+                                            {% endif %}
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ product.name }}</h5>
+                                                <p class="card-text" style="margin-bottom: 0;">{{ product.quantity }}</p>
+                                                <p class="card-text">R$ <strong>{{ product.price }}</strong></p>
+                                                <button type="button" class="btn btn-laranja" data-bs-toggle="modal" data-bs-target="#modalVerProduto" onclick="viewProduct({{ product.id }})">
+                                                    VER PRODUTO
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                {% endfor %}
+                                    {% endfor %}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {% else %}
+                        <div class="d-flex align-items-center justify-content-center h-100">
+                            <h3>Nenhum Produto Encontrado.</h3>
+                        </div>
+                    {% endif %}
                 </div>
             </section>
 

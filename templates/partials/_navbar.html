@@ -46,11 +46,15 @@
                 {% if user.is_authenticated %}
                     <!-- COM CONTA LOGADA -->
                     <div class="d-flex">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="" id="" href="{% url 'profile' %}" title="Meu perfil">
-                                    <i class="bi bi-person-circle" id="minha-conta"></i>
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 pr-7">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bi bi-person-circle icone-navbar"></i>{{ user.get_full_name|upper  }}
                                 </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="{% url 'profile' %}"><i class="bi bi-person minha-conta"></i> Meu perfil</a>
+                                    <a class="dropdown-item" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right minha-conta"></i> Sair</a>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -67,7 +71,7 @@
                         </ul>
                     </div> 
                 {% endif %}
-                </div>
+            </div>
 
         </div>
     </nav>

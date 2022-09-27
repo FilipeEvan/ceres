@@ -19,18 +19,18 @@
                     <label for="cadastroNome" class="label-campo">Nome <strong><span
                                 class="asteristico">*</span></strong></label>
                     <input type="text" class="input-campo" id="first_name" name="first_name"
-                        placeholder="Digite seu nome . . ." required value="{{ user.first_name|default_if_none:"" }}">
+                        placeholder="Digite seu nome . . ." required value="{{ user.first_name|default_if_none:'' }}" readonly>
                 </div>
                 <div style="margin-bottom: 15px;">
                     <label for="cadastroSobrenome" class="label-campo">Sobrenome</label>
                     <input type="text" class="input-campo" id="last_name" name="last_name"
-                        placeholder="Digite seu sobrenome . . ." value="{{ user.last_name|default_if_none:"" }}">
+                        placeholder="Digite seu sobrenome . . ." required value="{{ user.last_name|default_if_none:'' }}" readonly>
                 </div>
                 <div style="margin-bottom: 15px;">
                     <label for="cadastroEmail" class="label-campo">E-mail <strong><span
                                 class="asteristico">*</span></strong></label>
                     <input type="email" class="input-campo" id="email" name="email"
-                        placeholder="Digite seu email . . ." readonly value="{{ user.email|default_if_none:"" }}">
+                        placeholder="Digite seu email . . ." readonly value="{{ user.email|default_if_none:'' }}">
                 </div>
                 <!-- <div style="margin-bottom: 15px;">
                     <label for="cadastroSenha" class="label-campo">Senha <strong><span
@@ -45,8 +45,9 @@
                         placeholder="Digite sua senha novamente . . ." required>
                 </div> -->
 
-                <button type="submit" class="botao-principal" id="btn-editar-conta" style="margin-bottom: 25px;">Editar
-                    conta</button>
+                <button type="submit" class="botao-principal" id="btn-editar-conta" style="margin-bottom: 25px;" hidden>
+                    Editar conta
+                </button>
             </div>
         </form>
     </main>
