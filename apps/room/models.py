@@ -3,11 +3,21 @@ from django.contrib.auth.models import User
 
 from store.models import Store
 
-
 class Room(models.Model):
     slug = models.SlugField(unique=True)
-    client = models.ForeignKey(User, on_delete=models.DO_NOTHING, db_column='client')
-    store = models.ForeignKey(Store, on_delete=models.DO_NOTHING, db_column='store')
+    client = models.ForeignKey(User, on_delete=models.CASCADE, db_column='client')
+    store = models.ForeignKey(Store, on_delete=models.CASCADE, db_column='store')
     
     class Meta:
         db_table = 'rooms'
+
+class Message(models.Model):
+    room = models.ForeignKey(Room, related_name='messages', on_delete=models.CASCADE, db_column='room')
+    user = models.ForeignKey(User, related_name='messages', on_delete=models.CASCADE, db_column='user')
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ('created_at',)
+        db_table = 'messages'
+        

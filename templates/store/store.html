@@ -112,7 +112,7 @@
                         </div>
                         <div>
                             {% with store.user.username|add:"-"|add:user.username as slug %}
-                                <a href="{% url 'room' slug %}?store={{ store }}" target="_blank" id="btn-chat">IR PARA CHAT <i class="bi bi-caret-right-fill" style="color: white;"></i></a>
+                                <a href="{% url 'room' slug %}?store={{ store.id }}" target="_blank" id="btn-chat">IR PARA CHAT <i class="bi bi-caret-right-fill" style="color: white;"></i></a>
                             {% endwith %}
                         </div>
                     </div>
