@@ -4,15 +4,19 @@ from django.contrib.auth.models import User
 
 from store.models import Store
 from product.models import Product
+from room.models import Room
 
 def store(request, id):
     store = get_object_or_404(Store, pk=id)
+
     stores = Store.objects.all()
+    clients = Room.objects.filter(store=store)
     products = Product.objects.filter(store=store)
-    
+
     context = {
         'stores': stores,
         'store': store,
+        'clients': clients,
         'products': products,
     }
 

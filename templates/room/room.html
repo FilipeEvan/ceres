@@ -15,7 +15,7 @@
             <div class="chat-body">
                 <div class="messages">
                     <div id="chat-messages" class="messages-list">
-                        <span class="message-bot">Bem vindo {{ room.client.get_full_name }}</span>
+                        <span class="message-bot">{{ room.client.get_full_name }}</span>
                         {% for message in messages %}
                             <div class="message-container {% if message.user == user %}message-mine{% endif %}">
                                 <p class="author">{{ message.user.username }}</p>

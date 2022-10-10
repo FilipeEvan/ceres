@@ -114,12 +114,27 @@
                     <div class="conteudo">
                         <div id="div-titulo-sessao">
                             <i class="bi bi-chat-left-text-fill"></i>
-                            <h2 class="titulo-sessao">CHAT</h2>
+                            <h2 class="titulo-sessao">CHATS</h2>
                         </div>
-                        <div>
-                            {% with store.user.username|add:"-"|add:user.username as slug %}
-                                <a href="{% url 'room' slug %}?store={{ store.id }}" target="_blank" id="btn-chat">IR PARA CHAT <i class="bi bi-caret-right-fill" style="color: white;"></i></a>
-                            {% endwith %}
+                        <div id="container-chat">
+                            {% if store.user == user %}
+                                {% for client in clients %}
+                                    <div class="btn-chat-dono">
+                                        <span>{{ client.client.get_full_name}}</span>
+                                        <a href="{% url 'room' client.slug %}?store={{ store.id }}" target="_blank">
+                                            IR PARA CHAT
+                                            <i class="bi bi-caret-right-fill" style="color: white;"></i>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% with store.user.username|add:"-"|add:user.username as slug %}
+                                    <a href="{% url 'room' slug %}?store={{ store.id }}" target="_blank" id="btn-chat">
+                                        IR PARA CHAT
+                                        <i class="bi bi-caret-right-fill" style="color: white;"></i>
+                                    </a>
+                                {% endwith %}
+                            {% endif %}
                         </div>
                     </div>
                 </section>
