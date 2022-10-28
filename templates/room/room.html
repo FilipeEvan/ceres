@@ -61,7 +61,12 @@
             const data = JSON.parse(e.data);
 
             if (data.message) {
-                let html = '<div class="message-container">'
+                let html = '<div class="message-container ' 
+                    if (data.username == userName) {
+                        console.log('entrou')
+                        html += 'message-mine'
+                    }
+                    html += '">'
                     html += '<p class="author">' + data.username + '</p>'
                     html += '<p class="message">' + data.message + '</p></div>'
 
