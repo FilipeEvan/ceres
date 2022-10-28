@@ -87,7 +87,7 @@
 
 #titulo-loja {
     color: var(--branco);
-    font-size: 34px;
+    font-size: 30px;
     width: 100%;
     text-align: center;
     text-transform: uppercase;
@@ -114,7 +114,7 @@
 
 #div-titulo-sessao {
     display: inline-block;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     /* border: 2px solid var(--vinho); */
 }
 
@@ -153,7 +153,8 @@
 
 #cadastroTipoQuantidadeProduto {
     display: inline-block;
-    width: 230px;
+    width: 175px !important;
+    margin-right: 50px;
 }
 
 #cadastroPrecoProduto {
@@ -197,7 +198,7 @@
 
 
 #div-conteudo-informacoes {
-    margin: 15px 0 0 30px;
+    margin: 0px 0 15px 30px;
 }
 
 .p-informacao {
@@ -222,11 +223,10 @@
 
 #chat {
     height: auto;
-    max-width: 700px;
+    max-width: 1000px;
 }
 
 .conteudo {
-    display: flex;
     flex-direction: column;
     position: relative;
 }
@@ -305,6 +305,7 @@
 }
 
 .card-title {
+    font-size: 18px !important;
     width: 160px;
     text-align: center;
 }
@@ -321,7 +322,7 @@
     display: inline-block;
     margin: 0 9px 0 9px;
     display: flex;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.378);
+    box-shadow: -4px 4px 6px rgba(0, 0, 0, 0.397);
     justify-content: center;
     align-items: center;
 }
@@ -356,7 +357,6 @@
 }
 
 #arrow {
-    font-size: 1.5em;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -365,7 +365,7 @@
 }
 
 #btn-adc-produto2 {
-    display: block;
+    display: inline-block;
     margin: 25px auto 0px auto;
     width: 250px;
     height: auto;
@@ -410,6 +410,7 @@
     align-items: center;
     flex-wrap: wrap;
     display: flex;
+    padding: 20px 0 10px 0;
 }
 
 .btn-chat-dono {
@@ -421,7 +422,7 @@
     display: inline-block;
     padding: 5px 10px;
     border-radius: 10px;
-    box-shadow: -4px 4px 5px rgba(0, 0, 0, 0.801);
+    box-shadow: -4px 4px 5px rgba(0, 0, 0, 0.566);
     color: var(--branco);
     background-color: #ebebeb;
 }

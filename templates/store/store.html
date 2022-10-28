@@ -40,7 +40,7 @@
                     <div id="div-conteudo-informacoes">
                         <div class="item-paragrafro" title="Telefone para contato">
                             <i class="bi bi-telephone-fill"></i>
-                            <p class="p-informacao"><strong>Tel:</strong> {{ store.phone }}</p>
+                            <p class="p-informacao"><strong>Telefone:</strong> {{ store.phone }}</p>
                         </div><br>
                         <div class="item-paragrafro" title="localização da loja">
                             <i class="bi bi-geo-alt-fill"></i>
@@ -74,10 +74,12 @@
                     {% if products %}
                         <div class="container-itens-scroll">
                             <div class="scroll-horizontal">
-                                <button class="botao" id="botaoEsquerdo" onclick="scrollHorizontal(1)"><i
-                                        class="bi bi-chevron-left" id="arrow"></i></button>
-                                <button class="botao" id="botaoDireito" onclick="scrollHorizontal(-1)"><i
-                                        class="bi bi-chevron-right" id="arrow"></i></button>
+                                <button class="botao" id="botaoEsquerdo" onclick="scrollHorizontal(1)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#730202" viewBox="0 0 24 24"><path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/></svg>
+                                    </button>
+                                <button class="botao" id="botaoDireito" onclick="scrollHorizontal(-1)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" id="arrow"  width="22" height="22" fill="#730202" viewBox="0 0 24 24"><path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/></svg>
+                                    </button>
                                 <div id="cards-container">
                                     {% for product in products %}
                                         <div class="card" style="width: 11rem;">
@@ -118,15 +120,21 @@
                         </div>
                         <div id="container-chat">
                             {% if store.user == user %}
-                                {% for client in clients %}
-                                    <div class="btn-chat-dono">
-                                        <span>{{ client.client.get_full_name}}</span>
-                                        <a href="{% url 'room' client.slug %}?store={{ store.id }}" target="_blank">
-                                            IR PARA CHAT
-                                            <i class="bi bi-caret-right-fill" style="color: white;"></i>
-                                        </a>
+                                {% if clients %}
+                                    {% for client in clients %}
+                                        <div class="btn-chat-dono">
+                                            <span>{{ client.client.get_full_name}}</span>
+                                            <a href="{% url 'room' client.slug %}?store={{ store.id }}" target="_blank">
+                                                IR PARA CHAT
+                                                <i class="bi bi-caret-right-fill" style="color: white;"></i>
+                                            </a>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="d-flex align-items-center justify-content-center h-100">
+                                        <h3>Nenhum Chat Encontrado.</h3>
                                     </div>
-                                {% endfor %}
+                                {% endif %}
                             {% else %}
                                 {% with store.user.username|add:"-"|add:user.username as slug %}
                                     <a href="{% url 'room' slug %}?store={{ store.id }}" target="_blank" id="btn-chat">

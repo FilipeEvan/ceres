@@ -6,7 +6,7 @@
     --branco: #FFFFFF;
     --brancoFormulario: #fafafa;
     --laranja: #D96704;
-    --preto: #151515;
+    --preto: #1b1b1b;
     --cinza1: #9A9A9A;
     --cinza2: #C4C4C4;
     --cinza3: #E1E1E1;
@@ -33,6 +33,8 @@ body {
     color: white;
     margin-left: 50%;
     width: 135px;
+    font-size: 14px;
+    font-weight: 600;
     transform: translate(-50%);
 }
 
@@ -42,28 +44,40 @@ body {
 }
 
 /* navbar */
+#navbar-central {
+    margin: 0 auto;
+}
 .bg-vinho {
     background-color: var(--vinho);
+}
+
+.container-fluid {
+    max-width: 1300px;
+    padding: 0px !important;
 }
 
 .nav-link:hover {
     color: var(--branco) !important;
 }
+.nav-item {
+    width: 178px;
+}
 
 .nav-link {
-    font-size: 18px;
+    font-size: 20px;
+    padding: 8px 12px !important;
 }
 
 #botaoNavBar {
-    font-size: 18px;
+    font-size: 16px;
     background-color: var(--brancoFormulario);
     color: var(--vinho);
     font-weight: bold;
     border: 2px solid var(--vinho);
-    padding: 8px 10px;
+    padding: 6px 10px;
     border-radius: 10px;
     text-align: center;
-    margin: 3px 10px 3px 0;
+    margin: 3px 4px 3px 4px;
 }
 
 #botaoNavBar:hover {
@@ -74,8 +88,8 @@ body {
 
 .icone-navbar {
     color: #f0f0f0;
-    font-size: 25px;
-    padding: 5px;
+    font-size: 22px;
+    padding: 5px 7px;
 }
 
 #minha-conta {
@@ -192,8 +206,14 @@ body {
 
 
 
+.btn-danger {
+    background-color: var(--vinho);
+    border-color: var(--vinho);
+}
+.btn-danger:hover {
+    background-color: #8d0202;
 
-
+}
 
 .titulo {
     text-align: center;
@@ -218,6 +238,15 @@ body {
 .navbar-brand {
     font-size: 38px;
     letter-spacing: 2px;
+}
+
+.navbar-brand img {
+    margin-right: 10px;
+}
+
+.btnHome-busca {
+    background-color: var(--vinho) !important;
+    color: var(--vinho);
 }
 
 
