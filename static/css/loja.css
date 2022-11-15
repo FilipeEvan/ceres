@@ -108,7 +108,7 @@
     padding: 30px 40px 30px 40px;
     margin: auto;
     margin-bottom: 30px;
-    border-radius: 10px;
+    border-radius: 15px;
     box-shadow: -4px 4px 5px rgba(0, 0, 0, 0.342);
 }
 
@@ -129,8 +129,8 @@
     /* border-radius: 8px; */
     margin: 0 0 0 5px;
     display: inline-block;
-    font-size: 32px;
-    font-weight: 500;
+    font-size: 30px;
+    font-weight: 600;
     color: var(--preto);
     border-bottom: 3px solid var(--vinho);
 }
@@ -171,7 +171,7 @@
     width: 350px;
     margin-left: 50%;
     transform: translate(-50%);
-    margin-bottom: 30px;
+    border-radius: 10px;
 }
 
 .titulo-card-produto {
@@ -191,7 +191,7 @@
 }
 
 .paragrafo-conteudo-card {
-    margin-left: 10px;
+    margin-left: 20px;
     margin-bottom: 0px;
 }
 
@@ -310,6 +310,11 @@
     text-align: center;
 }
 
+#modalName {
+    margin-bottom: 16px !important;
+    text-align: center;
+}
+
 .card-text {
     text-align: left;
     padding: 0 20px;
@@ -322,7 +327,7 @@
     display: inline-block;
     margin: 0 9px 0 9px;
     display: flex;
-    box-shadow: -4px 4px 6px rgba(0, 0, 0, 0.397);
+    box-shadow: -3px 3px 6px rgba(0, 0, 0, 0.295);
     justify-content: center;
     align-items: center;
 }
@@ -385,14 +390,15 @@
 }
 
 #btn-chat {
-    width: 100%;
+    width: 50%;
     text-align: center;
     margin: 30px 0 0 0;
     text-decoration: none;
-    border: 4px solid var(--preto);
+    border: 3px solid var(--preto);
     display: inline-block;
     padding: 5px 10px;
-    border-radius: 20px;
+    font-weight: 500;
+    border-radius: 15px;
     color: var(--branco);
     background-color: var(--vinho);
     cursor: pointer;
@@ -400,7 +406,7 @@
 
 #btn-chat:hover {
     background-color: #730202e8;
-    border: 4px solid #151515c5;
+    border: 3px solid #151515c5;
 }
 
 

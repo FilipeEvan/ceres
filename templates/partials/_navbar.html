@@ -5,11 +5,12 @@
         <div class="container-fluid">
 
             <a class="navbar-brand" style="margin-right: 0px !important; width: 356px;" href="/">
-                <img src="{% static 'img/logo.png' %}" alt="" width="60" height="48" class="d-inline-block align-text-top">CERES
+                <img src="{% static 'img/logo.png' %}" alt="" width="60" height="48"
+                    class="d-inline-block align-text-top">CERES
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -18,65 +19,74 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{% url 'dashboard' %}" title="Ir à Home">
                             <style>
-                                #abc:hover {
+                                #abc span {
+                                    color: #ffffff8c;
+                                }
+
+                                #abc:hover span {
                                     color: #ffffff;
                                 }
                             </style>
-                            <div id="abc" style="width: 94px; margin-left: 50%; transform: translate(-50%); color: #ffffff8c">
-                                <i class="bi bi-house-door-fill icone-navbar"></i>HOME
+                            <div id="abc"
+                                style="width: 94px; margin-left: 50%; transform: translate(-50%); color: #ffffff8c">
+                                <i class="bi bi-house-door-fill icone-navbar"></i><span>HOME</span>
                             </div>
                         </a>
                     </li>
                     {% if user.is_authenticated %}
-                        {% if user.is_staff %}
-                            {% if stores %}
-                                {% for store in stores %}
-                                    {% if store.user == user %}
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{% url 'store' store.id %}" title="Ir à Minha loja">
-                                                <i class="bi bi-cart-fill icone-navbar"></i>MINHA LOJA
-                                            </a>
-                                        </li>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                        {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'create_store' %}" title="Ir à Criar loja">
-                                    <i class="bi bi-bag-plus-fill icone-navbar"></i>CRIAR LOJA
-                                </a>
-                            </li>
-                        {% endif %}
+                    {% if user.is_staff %}
+                    {% if stores %}
+                    {% for store in stores %}
+                    {% if store.user == user %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'store' store.id %}" title="Ir à Minha loja">
+                            <i class="bi bi-cart-fill icone-navbar"></i>MINHA LOJA
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'create_store' %}" title="Ir à Criar loja">
+                            <i class="bi bi-bag-plus-fill icone-navbar"></i>CRIAR LOJA
+                        </a>
+                    </li>
+                    {% endif %}
                     {% endif %}
                 </ul>
-                
+
                 {% if user.is_authenticated %}
-                    <!-- COM CONTA LOGADA -->
-                    <div class="d-flex">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 pr-7">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" style="color: #ffffff;" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="bi bi-person-circle icone-navbar"></i>{{ user.get_full_name|title  }}
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="{% url 'profile' %}"><i class="bi bi-person minha-conta"></i> Meu perfil</a>
-                                    <a class="dropdown-item" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right minha-conta"></i> Sair</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                <!-- COM CONTA LOGADA -->
+                <div class="d-flex" style="width: 356px;">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 pr-7" style="margin-right: 0; margin-left: 180px;">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: #ffffff;" href="#"
+                                id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="bi bi-person-circle icone-navbar"></i>{{ user.get_full_name|title }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="{% url 'profile' %}"><i
+                                        class="bi bi-person minha-conta"></i> Meu perfil</a>
+                                <a class="dropdown-item" href="{% url 'logout' %}"><i
+                                        class="bi bi-box-arrow-right minha-conta"></i> Sair</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
                 {% else %}
-                    <!-- SEM CONTA LOGADA -->
-                    <div class="d-flex">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="botaoNavBar" href="{% url 'register' %}">CADASTRAR</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" id="botaoNavBar" href="{% url 'login' %}">LOGAR</a>
-                            </li>
-                        </ul>
-                    </div> 
+                <!-- SEM CONTA LOGADA -->
+                <div class="d-flex">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="botaoNavBar" href="{% url 'register' %}">CADASTRAR</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" id="botaoNavBar" href="{% url 'login' %}">LOGAR</a>
+                        </li>
+                    </ul>
+                </div>
                 {% endif %}
             </div>
 
